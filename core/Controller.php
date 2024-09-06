@@ -10,7 +10,7 @@ class Controller
     private string $uri;
     private string $namespace;
     private string $controller;
-    private $folders = [
+    private array $folders = [
         'app\controllers\portal',
         'app\controllers\admin'
     ];
@@ -49,7 +49,7 @@ class Controller
         return $this->instantiateController();
     }
 
-    private function getControllerNotFound()
+    private function getControllerNotFound(): string
     {
         if (substr_count($this->uri, '/') > 1) {
             list($this->controller) = array_values(array_filter(explode('/', $this->uri)));
@@ -59,7 +59,7 @@ class Controller
         return ucfirst(ltrim($this->uri, '/')) . 'Controller';
     }
 
-    private function isHome()
+    private function isHome(): bool
     {
         return $this->uri === '/';
     }
@@ -84,5 +84,6 @@ class Controller
         $controller = $this->namespace . '\\' . $this->controller;
         return new $controller;
     }
-
 }
+
+// MVC com PHP#05 - Criando Controller - parte 3 4:26
